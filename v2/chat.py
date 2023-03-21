@@ -8,10 +8,7 @@ sys.path.append(f'{current_path}/../rwkv_pip_package/src')
 
 import numpy as np
 from prompt_toolkit import prompt
-try:
-    os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[1]
-except:
-    pass
+
 np.set_printoptions(precision=4, suppress=True, linewidth=200)
 args = types.SimpleNamespace()
 
