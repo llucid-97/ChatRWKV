@@ -58,7 +58,7 @@ CHAT_LANG = 'English' # English // Chinese // more to come
 # Use '/' in model path, instead of '\'
 # Use convert_model.py to convert a model for a strategy, for faster loading & saves CPU RAM 
 if CHAT_LANG == 'English':
-    args.MODEL_NAME = '/fsx/BlinkDL/HF-MODEL/rwkv-4-pile-14b/RWKV-4-Pile-14B-20230313-ctx8192-test1050'
+    args.MODEL_NAME = '/content/model'
     # args.MODEL_NAME = '/fsx/BlinkDL/HF-MODEL/rwkv-4-pile-7b/RWKV-4-Pile-7B-20230109-ctx4096'
     # args.MODEL_NAME = '/fsx/BlinkDL/HF-MODEL/rwkv-4-pile-3b/RWKV-4-Pile-3B-20221110-ctx4096'
     # args.MODEL_NAME = 'cuda_fp16_RWKV-4-Pile-7B-20230109-ctx4096' # use convert_model.py for faster loading & saves CPU RAM
@@ -83,10 +83,10 @@ FREE_GEN_LEN = 200
 
 # For better chat & QA quality: reduce temp, reduce top-p, increase repetition penalties
 # Explanation: https://platform.openai.com/docs/api-reference/parameter-details
-GEN_TEMP = 1.0 # sometimes it's a good idea to increase temp. try it
+GEN_TEMP = os.environ.get("temperature",1.0) # sometimes it's a good idea to increase temp. try it
 GEN_TOP_P = 0.8
-GEN_alpha_presence = 0.2 # Presence Penalty
-GEN_alpha_frequency = 0.2 # Frequency Penalty
+GEN_alpha_presence = os.environ.get("presence_penalty",0.2)# 0.2 # Presence Penalty
+GEN_alpha_frequency = os.environ.get("frequency_penalty",0.2)#0.2 # Frequency Penalty
 AVOID_REPEAT = '，：？！'
 
 CHUNK_LEN = 256 # split input into chunks to save VRAM (shorter -> slower)
